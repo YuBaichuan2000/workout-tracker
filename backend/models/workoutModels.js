@@ -19,7 +19,6 @@ const workoutSchema = new Schema({
 
 const Workout = mongoose.model('Workout', workoutSchema);
 
-export default {
-    Workout
-}
+export default Workout;
+
 

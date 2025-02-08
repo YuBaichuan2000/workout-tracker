@@ -12,6 +12,7 @@ app.use((req, res, next) => {
     next();
 })
 
+app.use(express.json());
 app.use('/api/workouts', workoutRoutes);
 
 mongoose.connect(process.env.MONGO_URI)
