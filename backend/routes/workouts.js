@@ -2,8 +2,25 @@ import express from 'express';
 
 const router = express.Router();
 
-router.get('/', () => {
+router.get('/', (req, res) => {
+    res.json({msg: 'GET all workouts'});
+});
 
-})
+router.get('/:id', (req, res) => {
+    res.json({msg: 'GET a single workout'});
+});
 
-module.exports = router
+router.post('/', (req, res) => {
+    res.json({msg: 'POST a new workout'});
+});
+
+router.delete('/:id', (req, res) => {
+    res.json({msg: 'DELETE a workout'});
+});
+
+router.patch('/:id', (req, res) => {
+    res.json({msg: 'UPDATE a workout'});
+});
+
+
+export default router;
