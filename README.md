@@ -11,9 +11,10 @@
 * Database: mongodb, mongoose
 
 ## Demo
-* Home Dashboard
 
-* User Input Validation
+<img src="assets/homepage.png" alt="App Screenshot" width="500" />
+<img src="assets/input_validation.png" alt="App Screenshot" width="500"/ >
+
 
 
 ## Future Work
