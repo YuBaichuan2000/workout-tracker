@@ -13,10 +13,10 @@ app.use(express.json());
 
 app.use('/api/workouts', workoutRoutes);
 
-app.use((req, res, next) => {
-    console.log(req.path, req.method);
-    next();
-})
+// app.use((req, res, next) => {
+//     console.log(req.path, req.method);
+//     next();
+// })
 
 mongoose.connect(process.env.MONGO_URI)
 .then(() => {
@@ -28,8 +28,5 @@ mongoose.connect(process.env.MONGO_URI)
     console.log(e);
 });
 
-app.get('/', (req, res) => {
-    res.json({msg: "welcome to the app"});
-});
 
 
