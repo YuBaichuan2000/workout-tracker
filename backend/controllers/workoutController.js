@@ -38,6 +38,21 @@ export const getSingleWorkout = async (req, res) => {
 export const createWorkout = async (req, res) => {
     try {
         const {title, reps, load} = req.body;
+
+        let empty = []
+        if (!title) {
+            empty.push('title');
+        };
+        if (!load) {
+            empty.push('load');
+        };
+        if (!reps) {
+            empty.push('reps');
+        };
+        if (empty.length > 0){
+            return res.status(400).json({error: 'Please fill in all fields', empty});
+        }
+
         const workout = await Workout.create({title, reps, load});
         res.status(200).json(workout);
     } catch (error) {
