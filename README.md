@@ -7,8 +7,13 @@
 
 ## Tech Stack
 * Frontend: React, CSS
-* Backend: nodejs with Express
+* Backend: nodejs with Express, RESTful API
 * Database: mongodb, mongoose
+
+## Skills Gained
+* How to use React hooks: useState, useEffect, useContext, useReducer
+* How to use RESTful API to communicate with frontend and backend
+* How to setup frontend and backend from scratch
 
 ## Demo
 
