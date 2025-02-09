@@ -11,6 +11,9 @@
 * Database: mongodb, mongoose
 
 ## Demo
+* Home Dashboard
+
+* User Input Validation
 
 
 ## Future Work
