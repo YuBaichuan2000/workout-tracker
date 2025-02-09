@@ -1,5 +1,4 @@
 {
-  "proxy": "https://workout-tracker-f15p.onrender.com/",
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
