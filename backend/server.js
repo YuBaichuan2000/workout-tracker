@@ -9,9 +9,9 @@ dotenv.config();
 const app = express();
 
 app.use(cors({
-    origin: 'https://workout-tracker-f15p.onrender.com/'
+    origin: 'https://workout-tracker-frontend-1gjy.onrender.com'
   }));
-  
+
 app.use(express.json());
 
 app.use('/api/workouts', workoutRoutes);
