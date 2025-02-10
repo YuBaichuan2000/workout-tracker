@@ -1,4 +1,4 @@
-# workout-tracker deployed on Render(https://workout-tracker-frontend-1gjy.onrender.com/)
+# [workout-tracker](https://workout-tracker-frontend-1gjy.onrender.com/) deployed on Render
 
 ## User stories
 * As a user, I want to upload a workout record
