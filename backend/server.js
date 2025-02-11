@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import workoutRoutes from './routes/workouts.js';
+import userRoutes from './routes/users.js';
 import mongoose from 'mongoose';
 import cors from 'cors';
 
@@ -17,6 +18,8 @@ app.use(cors({
 app.use(express.json());
 
 app.use('/api/workouts', workoutRoutes);
+app.use('/api/users', userRoutes);
+
 
 // app.use((req, res, next) => {
 //     console.log(req.path, req.method);
