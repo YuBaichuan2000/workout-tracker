@@ -10,7 +10,8 @@ const Home = () => {
 
     useEffect(() => {
         const fetchWorkouts = async () => {
-            const response = await fetch('https://workout-tracker-f15p.onrender.com/api/workouts');
+            // 'https://workout-tracker-f15p.onrender.com';
+            const response = await fetch('http://localhost:4000/api/workouts');
             const data = await response.json();
 
             if (response.ok) {
