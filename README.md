@@ -23,6 +23,5 @@
 
 
 ## Future Work
-* User can edit a workout record
 * User Authentication
 
