@@ -3,15 +3,22 @@ import useWorkoutsContext from '../hooks/useWorkoutsContext';
 
 import WorkoutDetails from '../components/WorkoutDetails';
 import WorkoutForm from "../components/WorkoutForm";
+import useAuthContext from '../hooks/useAuthContext';
 
 const Home = () => {
 
     const {workouts, dispatch} = useWorkoutsContext();
+    const { user } = useAuthContext();
 
     useEffect(() => {
         const fetchWorkouts = async () => {
+
             // 'https://workout-tracker-f15p.onrender.com';
-            const response = await fetch('http://localhost:4000/api/workouts');
+            const response = await fetch('http://localhost:4000/api/workouts', {
+                headers: {
+                    'Authorization': `Bearer ${user.token}`
+                }
+            });
             const data = await response.json();
 
             if (response.ok) {
@@ -20,9 +27,12 @@ const Home = () => {
 
         }
 
-        fetchWorkouts();
+        if (user) {
+            fetchWorkouts();
+        }
+        
 
-    }, [dispatch]);
+    }, [dispatch, user]);
 
 
     return ( 

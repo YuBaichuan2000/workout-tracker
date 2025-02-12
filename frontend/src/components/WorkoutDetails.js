@@ -1,4 +1,5 @@
 import useWorkoutsContext from '../hooks/useWorkoutsContext';
+import useAuthContext from '../hooks/useAuthContext';
 
 // date fns
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
@@ -6,8 +7,12 @@ import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 const WorkoutDetails = ( {workout} ) => {
 
     const { dispatch } = useWorkoutsContext();
+    const { user } = useAuthContext();
 
     const handleDelete = async () => {
+        if (!user) {
+            return;
+        }
         const response = await fetch('http://localhost:4000/api/workouts/'+workout._id, {
             method: 'DELETE'});
         const json = await response.json();
@@ -18,12 +23,9 @@ const WorkoutDetails = ( {workout} ) => {
     }
 
     const handleEdit = () => {
-        // const response = await fetch('http://localhost:4000/api/workouts/'+workout._id, {method: 'PATCH'});
-        // const json = await response.json();
-        
-        // if (response.ok) {
-        //     dispatch({type: 'EDIT_WORKOUT', payload: json});
-        // }
+        if (!user) {
+            return;
+        }
         dispatch({type: 'SET_EDIT_WORKOUT', payload: workout});
     }
 
