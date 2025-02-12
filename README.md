@@ -1,5 +1,16 @@
 # [workout-tracker](https://workout-tracker-frontend-1gjy.onrender.com/) deployed on Render
 
+## Demo
+To try it out, use the demo account
+- Email: demouser1@gmail.com
+- Password: 9e%kr8Ud92$k
+
+<img src="assets/homepage.png" alt="App Screenshot" width="500" />
+<img src="assets/input_validation.png" alt="App Screenshot" width="500"/ >
+
+
+
+
 ## User stories
 * As a user, I want to signup or login or use as a visitor
 * As a user, I want to upload a workout record
@@ -18,10 +29,7 @@
 * How to setup frontend and backend from scratch
 * How to use JWT for user authentication, how to protect React components and backend routes
 
-## Demo
 
-<img src="assets/homepage.png" alt="App Screenshot" width="500" />
-<img src="assets/input_validation.png" alt="App Screenshot" width="500"/ >
 
 ## Future Work
 * Add visitor access
