@@ -15,8 +15,9 @@ const workoutSchema = new Schema({
         type: Number,
         required: true
     },
-    user_id : {
-        type: String,
+    user_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
         required: true
     }
 }, {timestamps: true});

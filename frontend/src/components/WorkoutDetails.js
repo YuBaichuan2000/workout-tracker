@@ -14,7 +14,9 @@ const WorkoutDetails = ( {workout} ) => {
             return;
         }
         const response = await fetch('http://localhost:4000/api/workouts/'+workout._id, {
-            method: 'DELETE'});
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${user.token}`}}
+        );
         const json = await response.json();
         
         if (response.ok) {
