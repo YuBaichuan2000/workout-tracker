@@ -24,6 +24,8 @@
 <img src="assets/input_validation.png" alt="App Screenshot" width="500"/ >
 
 ## Future Work
+* Add visitor access
+* User can update password if forgot
 * Google OAuth
 * Deploy to AWS
 
