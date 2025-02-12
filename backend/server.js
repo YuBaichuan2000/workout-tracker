@@ -11,8 +11,8 @@ dotenv.config();
 const app = express();
 
 app.use(cors({
-    // origin: 'https://workout-tracker-frontend-1gjy.onrender.com'
-    origin: 'http://localhost:3000'
+    origin: 'https://workout-tracker-frontend-1gjy.onrender.com'
+    // origin: 'http://localhost:3000'
   }));
 
 app.use(express.json());
