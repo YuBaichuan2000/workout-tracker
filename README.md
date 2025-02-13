@@ -32,7 +32,7 @@ To try it out, use the demo account
 
 
 ## Future Work
-* Add visitor access
+* Pagination
 * User can update password if forgot
 * Google OAuth
 * Deploy to AWS
