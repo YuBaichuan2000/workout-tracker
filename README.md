@@ -33,8 +33,9 @@ To try it out, use the demo account
 
 ## Future Work
 * Pagination
-* User can update password if forgot
+* Password reset, email verification
 * Google OAuth
+* Stripe
 * Deploy to AWS
 
 
