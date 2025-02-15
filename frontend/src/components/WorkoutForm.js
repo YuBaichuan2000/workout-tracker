@@ -33,11 +33,18 @@ const WorkoutForm = () => {
         const workout = {title, load, reps};
         let response, json;
         if (editWorkout) {
-            response = await fetch ('https://workout-tracker-f15p.onrender.com/api/workouts/' + editWorkout._id, {
+            
+            response = await fetch ('http://localhost:4000/api/workouts/' + editWorkout._id, {
                 method: 'PATCH',
                 body: JSON.stringify(workout),
                 headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${user.token}` }
             });
+
+            // response = await fetch ('https://workout-tracker-f15p.onrender.com/api/workouts/' + editWorkout._id, {
+            //     method: 'PATCH',
+            //     body: JSON.stringify(workout),
+            //     headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${user.token}` }
+            // });
             json = await response.json();
 
             if (response.ok) {
@@ -48,12 +55,18 @@ const WorkoutForm = () => {
             }
 
         } else {
-            // 'https://workout-tracker-f15p.onrender.com'
-            response = await fetch('https://workout-tracker-f15p.onrender.com/api/workouts', {
+
+            response = await fetch('http://localhost:4000/api/workouts', {
                 method: 'POST', 
                 body: JSON.stringify(workout), 
                 headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${user.token}` }
             });
+
+            // response = await fetch('https://workout-tracker-f15p.onrender.com/api/workouts', {
+            //     method: 'POST', 
+            //     body: JSON.stringify(workout), 
+            //     headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${user.token}` }
+            // });
             json = await response.json();
 
             if (response.ok) {

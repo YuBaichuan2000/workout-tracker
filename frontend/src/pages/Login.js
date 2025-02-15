@@ -13,6 +13,12 @@ const Login = () => {
         await login(email, password);
     }
 
+    const handleGoogleLogin = async (e) => {
+        e.preventDefault();
+
+        window.location.href = 'http://localhost:4000/api/users/google';
+    }
+
     return ( 
         <form className="login" onSubmit={handleSubmit}>
             <h3>Log in</h3>
@@ -24,6 +30,7 @@ const Login = () => {
             <input type="password" onChange={(e)=>setPassword(e.target.value)} value={password}/>
 
             <button disabled={isLoading}>Log in</button>
+            <button onClick={handleGoogleLogin} disabled={isLoading}>Google</button>
             {error && <div className="error">{error}</div>}
 
         </form>
