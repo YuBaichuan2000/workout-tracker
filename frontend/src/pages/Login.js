@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { FcGoogle } from "react-icons/fc";
 import useLogin from "../hooks/useLogin";
 
 // Get the backend URL from your environment variables.
@@ -42,7 +41,6 @@ const Login = () => {
 
       <button disabled={isLoading}>Log in</button>
       <button onClick={handleGoogleLogin} disabled={isLoading}>
-        <FcGoogle size={24} style={{ marginRight: "8px" }} />
         Google
       </button>
       {error && <div className="error">{error}</div>}
