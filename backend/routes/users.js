@@ -13,12 +13,14 @@ router.post('/signup', signupUser);
 
 // auth with Google
 router.get('/google', passport.authenticate('google', {
-    scope: ['profile', 'email']
+    scope: ['profile', 'email'],
+    session: false
 }));
 
 // callback route for google
-router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
-    res.status(200).json({msg: 'you reached callback URI'})
+router.get('/google/redirect', passport.authenticate('google', {session: false}), (req, res) => {
+    const {email, token} = req.user;
+    res.redirect(`http://localhost:3000/auth/google?token=${token}&email=${email}`);
 });
 
 export default router;

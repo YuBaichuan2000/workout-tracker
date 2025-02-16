@@ -4,6 +4,7 @@ import workoutRoutes from './routes/workouts.js';
 import userRoutes from './routes/users.js';
 import mongoose from 'mongoose';
 import cors from 'cors';
+import passport from 'passport';
 
 
 dotenv.config();
@@ -16,6 +17,7 @@ app.use(cors({
 }));
 
 app.use(express.json());
+app.use(passport.initialize());
 
 app.use('/api/workouts', workoutRoutes);
 app.use('/api/users', userRoutes);

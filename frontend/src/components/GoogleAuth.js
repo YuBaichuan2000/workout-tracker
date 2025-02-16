@@ -1,0 +1,33 @@
+// GoogleAuth.jsx
+import React, { useEffect } from "react";
+import { useSearchParams, useNavigate } from "react-router-dom";
+import useAuthContext from "../hooks/useAuthContext";
+
+const GoogleAuth = () => {
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const { dispatch } = useAuthContext();
+
+  useEffect(() => {
+    // Retrieve token and email from query params
+    const token = searchParams.get("token");
+    const email = searchParams.get("email");
+
+    if (token && email) {
+      const user = { email, token };
+      // Save user to localStorage 
+      localStorage.setItem("user", JSON.stringify(user));
+      
+      dispatch({ type: "LOGIN", payload: user });
+      
+      navigate("/");
+    } else {
+      // Handle missing token/email
+      navigate("/login");
+    }
+  }, [searchParams, dispatch]);
+
+  return <div>Loading...</div>;
+};
+
+export default GoogleAuth;
