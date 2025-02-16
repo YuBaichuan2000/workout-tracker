@@ -11,6 +11,7 @@ const WorkoutForm = () => {
     const [reps, setReps] = useState('');
     const [error, setError]= useState(null);
     const [emptyFields, setEmptyFields] = useState([]);
+    const BACKEND_URL = process.env.REACT_APP_BACKEND_URL
 
     const { user } = useAuthContext();
 
@@ -34,17 +35,13 @@ const WorkoutForm = () => {
         let response, json;
         if (editWorkout) {
             
-            response = await fetch ('http://localhost:4000/api/workouts/' + editWorkout._id, {
+            response = await fetch (`${BACKEND_URL}/api/workouts/` + editWorkout._id, {
                 method: 'PATCH',
                 body: JSON.stringify(workout),
-                headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${user.token}` }
+                credentials: 'include',
+                headers: { 'Content-Type': 'application/json' }
             });
 
-            // response = await fetch ('https://workout-tracker-f15p.onrender.com/api/workouts/' + editWorkout._id, {
-            //     method: 'PATCH',
-            //     body: JSON.stringify(workout),
-            //     headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${user.token}` }
-            // });
             json = await response.json();
 
             if (response.ok) {
@@ -56,17 +53,13 @@ const WorkoutForm = () => {
 
         } else {
 
-            response = await fetch('http://localhost:4000/api/workouts', {
+            response = await fetch(`${BACKEND_URL}/api/workouts`, {
                 method: 'POST', 
                 body: JSON.stringify(workout), 
-                headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${user.token}` }
+                credentials: 'include',
+                headers: { 'Content-Type': 'application/json' }
             });
 
-            // response = await fetch('https://workout-tracker-f15p.onrender.com/api/workouts', {
-            //     method: 'POST', 
-            //     body: JSON.stringify(workout), 
-            //     headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${user.token}` }
-            // });
             json = await response.json();
 
             if (response.ok) {

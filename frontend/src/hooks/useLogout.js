@@ -4,11 +4,12 @@ import useWorkoutsContext from './useWorkoutsContext';
 const useLogout = () => {
   const { dispatch } = useAuthContext();
   const { dispatch: workoutsDispatch } = useWorkoutsContext();
+  const BACKEND_URL = process.env.REACT_APP_BACKEND_URL
 
   const logout = async () => {
     try {
       // Call the logout endpoint to clear the HTTP-only cookie on the server
-      await fetch('http://localhost:4000/api/users/logout', {
+      await fetch(`${BACKEND_URL}/api/users/logout`, {
         method: 'POST',
         credentials: 'include'
       });

@@ -6,6 +6,7 @@ const useSignup = () => {
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(null);
     const { dispatch } = useAuthContext();
+    const BACKEND_URL = process.env.REACT_APP_BACKEND_URL
 
     const signup = async (email, password) => {
         setIsLoading(true);
@@ -13,18 +14,13 @@ const useSignup = () => {
 
        
 
-        const response = await fetch('http://localhost:4000/api/users/signup', {
+        const response = await fetch(`${BACKEND_URL}/api/users/signup`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             credentials: 'include',
             body: JSON.stringify({email, password})
         });
 
-        // const response = await fetch('https://workout-tracker-f15p.onrender.com/api/users/signup', {
-        //     method: 'POST',
-        //     headers: {'Content-Type': 'application/json'},
-        //     body: JSON.stringify({email, password})
-        // });
 
         const json = await response.json();
 

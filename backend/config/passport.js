@@ -22,7 +22,7 @@ const createToken = (_id) => {
 
 export default passport.use(new GoogleStrategy({
     // options for strategy
-    callbackURL: 'http://localhost:4000/api/users/google/redirect',
+    callbackURL: process.env.NODE_ENV === 'development' ?  'http://localhost:4000/api/users/google/redirect' : 'https://workout-tracker-f15p.onrender.com/api/users/google/redirect',
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET
 }, async (accessToken, refreshToken, profile, done) => {

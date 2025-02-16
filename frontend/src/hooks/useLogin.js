@@ -6,12 +6,13 @@ const useLogin = () => {
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(null);
     const { dispatch } = useAuthContext();
+    const BACKEND_URL = process.env.REACT_APP_BACKEND_URL
 
     const login = async (email, password) => {
         setIsLoading(true);
         setError(null);
 
-        const response = await fetch('http://localhost:4000/api/users/login', {
+        const response = await fetch(`${BACKEND_URL}/api/users/login`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             credentials: 'include',
