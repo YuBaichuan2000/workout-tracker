@@ -30,7 +30,6 @@ export default passport.use(new GoogleStrategy({
     const currUser = await User.findOne({googleId: profile.id})
 
     if (currUser) {
-        console.log('User is: ', currUser);
         
         // create token
         const token = createToken(currUser._id);

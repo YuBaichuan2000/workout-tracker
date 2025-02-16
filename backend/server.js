@@ -5,6 +5,7 @@ import userRoutes from './routes/users.js';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import passport from 'passport';
+import cookieParser from 'cookie-parser';
 
 
 dotenv.config();
@@ -18,6 +19,7 @@ app.use(cors({
 
 app.use(express.json());
 app.use(passport.initialize());
+app.use(cookieParser());
 
 app.use('/api/workouts', workoutRoutes);
 app.use('/api/users', userRoutes);

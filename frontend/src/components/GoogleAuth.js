@@ -10,11 +10,10 @@ const GoogleAuth = () => {
 
   useEffect(() => {
     // Retrieve token and email from query params
-    const token = searchParams.get("token");
     const email = searchParams.get("email");
 
-    if (token && email) {
-      const user = { email, token };
+    if (email) {
+      const user = { email };
       // Save user to localStorage 
       localStorage.setItem("user", JSON.stringify(user));
       

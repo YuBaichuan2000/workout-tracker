@@ -14,6 +14,7 @@ const useLogin = () => {
         const response = await fetch('http://localhost:4000/api/users/login', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
+            credentials: 'include',
             body: JSON.stringify({email, password})
         });
 
@@ -30,7 +31,7 @@ const useLogin = () => {
             setError(json.error);
         }
         if (response.ok) {
-            // save user to local storage
+            // // save user to local storage, but just email
             localStorage.setItem('user', JSON.stringify(json))
 
             // update auth context
