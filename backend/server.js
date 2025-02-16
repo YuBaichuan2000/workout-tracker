@@ -4,6 +4,9 @@ import workoutRoutes from './routes/workouts.js';
 import userRoutes from './routes/users.js';
 import mongoose from 'mongoose';
 import cors from 'cors';
+import passport from 'passport';
+import cookieParser from 'cookie-parser';
+
 
 dotenv.config();
 
@@ -11,20 +14,16 @@ dotenv.config();
 const app = express();
 
 app.use(cors({
-    origin: 'https://workout-tracker-frontend-1gjy.onrender.com'
-    // origin: 'http://localhost:3000'
-  }));
+    origin: process.env.NODE_ENV === 'development' ?  'http://localhost:3000' : 'https://workout-tracker-frontend-1gjy.onrender.com'
+}));
 
 app.use(express.json());
+app.use(passport.initialize());
+app.use(cookieParser());
 
 app.use('/api/workouts', workoutRoutes);
 app.use('/api/users', userRoutes);
 
-
-// app.use((req, res, next) => {
-//     console.log(req.path, req.method);
-//     next();
-// })
 
 mongoose.connect(process.env.MONGO_URI)
 .then(() => {

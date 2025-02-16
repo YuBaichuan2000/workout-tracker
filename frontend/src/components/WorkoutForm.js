@@ -11,6 +11,7 @@ const WorkoutForm = () => {
     const [reps, setReps] = useState('');
     const [error, setError]= useState(null);
     const [emptyFields, setEmptyFields] = useState([]);
+    const BACKEND_URL = process.env.REACT_APP_BACKEND_URL
 
     const { user } = useAuthContext();
 
@@ -33,11 +34,14 @@ const WorkoutForm = () => {
         const workout = {title, load, reps};
         let response, json;
         if (editWorkout) {
-            response = await fetch ('https://workout-tracker-f15p.onrender.com/api/workouts/' + editWorkout._id, {
+            
+            response = await fetch (`${BACKEND_URL}/api/workouts/` + editWorkout._id, {
                 method: 'PATCH',
                 body: JSON.stringify(workout),
-                headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${user.token}` }
+                credentials: 'include',
+                headers: { 'Content-Type': 'application/json' }
             });
+
             json = await response.json();
 
             if (response.ok) {
@@ -48,12 +52,14 @@ const WorkoutForm = () => {
             }
 
         } else {
-            // 'https://workout-tracker-f15p.onrender.com'
-            response = await fetch('https://workout-tracker-f15p.onrender.com/api/workouts', {
+
+            response = await fetch(`${BACKEND_URL}/api/workouts`, {
                 method: 'POST', 
                 body: JSON.stringify(workout), 
-                headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${user.token}` }
+                credentials: 'include',
+                headers: { 'Content-Type': 'application/json' }
             });
+
             json = await response.json();
 
             if (response.ok) {

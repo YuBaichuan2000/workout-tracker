@@ -88,6 +88,7 @@ form button {
   font-family: "Poppins";
   border-radius: 4px;
   cursor: pointer;
+  margin-left: 5px;
 }
 div.error {
   padding: 10px;

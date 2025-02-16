@@ -9,21 +9,15 @@ const Home = () => {
 
     const {workouts, dispatch} = useWorkoutsContext();
     const { user } = useAuthContext();
+    const BACKEND_URL = process.env.REACT_APP_BACKEND_URL
 
     useEffect(() => {
         const fetchWorkouts = async () => {
 
-            // const response = await fetch('http://localhost:4000/api/workouts', {
-            //     headers: {
-            //         'Authorization': `Bearer ${user.token}`
-            //     }
-            // });
+            const response = await fetch(`${BACKEND_URL}/api/workouts`, {
+                credentials: 'include'
+              });
 
-            const response = await fetch('https://workout-tracker-f15p.onrender.com/api/workouts', {
-                headers: {
-                    'Authorization': `Bearer ${user.token}`
-                }
-            });
             const data = await response.json();
 
             if (response.ok) {

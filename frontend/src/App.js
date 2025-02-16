@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import Navbar from './components/Navbar';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import GoogleAuth from "./components/GoogleAuth";
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
           <Routes>
             <Route path='/' element={user ? <Home /> : <Navigate to='/login' />}></Route>
             <Route path='/login' element={!user ? <Login /> : <Navigate to='/' />}></Route>
+            <Route path="/auth/google" element={<GoogleAuth />} />
             <Route path='/signup' element={!user ? <Signup /> : <Navigate to='/' />}></Route>
           </Routes>
         </div>

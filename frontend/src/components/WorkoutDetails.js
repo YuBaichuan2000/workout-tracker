@@ -8,15 +8,19 @@ const WorkoutDetails = ( {workout} ) => {
 
     const { dispatch } = useWorkoutsContext();
     const { user } = useAuthContext();
+    const BACKEND_URL = process.env.REACT_APP_BACKEND_URL
 
     const handleDelete = async () => {
         if (!user) {
             return;
         }
-        const response = await fetch('https://workout-tracker-f15p.onrender.com/api/workouts/'+workout._id, {
+        // 
+        const response = await fetch(`${BACKEND_URL}/api/workouts/`+workout._id, {
             method: 'DELETE',
-            headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${user.token}`}}
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json'}}
         );
+
         const json = await response.json();
         
         if (response.ok) {

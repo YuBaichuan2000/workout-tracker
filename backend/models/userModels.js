@@ -12,7 +12,11 @@ const userSchema = new Schema ({
     },
     password: {
         type: String,
-        required: true
+        // required: true
+    },
+    // for google authentication
+    googleId: {
+        type: String
     }
 })
 
