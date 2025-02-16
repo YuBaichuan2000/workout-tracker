@@ -24,7 +24,7 @@ To try it out, use the demo account
 * Backend: nodejs with Express, RESTful API
 * Database: mongodb, mongoose
 * Tradeoff between JWT and cookie-session
-* Safeguard against XSS
+* Migrate ti HTTP-only cookie for JWT to safeguard against XSS
 
 ## Skills Gained
 * How to use React hooks: useState, useEffect, useContext, useReducer
