@@ -33,8 +33,9 @@ router.get('/google/redirect', passport.authenticate('google', {session: false})
         sameSite: 'strict', // helps mitigate CSRF attacks
         maxAge: 24 * 60 * 60 * 1000 // cookie expires in 1 day
     });
-
-    res.redirect(`http://localhost:3000/auth/google?email=${email}`);
+    
+    const redirectUrl = process.env.NODE_ENV === 'development' ?  `http://localhost:3000/auth/google?email=${email}` : `https://workout-tracker-f15p.onrender.com/auth/google?email=${email}`
+    res.redirect(redirectUrl);
 });
 
 export default router;
