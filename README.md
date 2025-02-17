@@ -5,12 +5,6 @@ To try it out, use the demo account
 - Email: demouser1@gmail.com
 - Password: 9e%kr8Ud92$k
 
-<img src="assets/homepage.png" alt="App Screenshot" width="500" />
-<img src="assets/input_validation.png" alt="App Screenshot" width="500"/ >
-
-
-
-
 ## User stories
 * As a user, I want to signup or login
 * As a user, I want to signup or login using Google account
