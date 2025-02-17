@@ -34,6 +34,7 @@ To try it out, use the demo account
 
 ## Future Work focused on Backend
 * Password reset, email verification
+* Add in product purchasing feature
 * Stripe/Buy me a coffee
 * Deploy to AWS
 
