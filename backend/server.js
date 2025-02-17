@@ -18,6 +18,8 @@ app.use(cors({
     credentials: true
 }));
 
+app.use(express.static(path.join(__dirname, 'build')));
+
 app.use(express.json());
 app.use(passport.initialize());
 app.use(cookieParser());

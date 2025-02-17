@@ -36,6 +36,6 @@ router.get('/google/redirect', passport.authenticate('google', {session: false})
     
     const redirectUrl = process.env.NODE_ENV === 'development' ?  `http://localhost:3000/auth/google?email=${email}` : `https://workout-tracker-frontend-1gjy.onrender.com/auth/google?email=${email}`
     res.redirect(redirectUrl);
-});
+});                                                                                                                     
 
 export default router;
