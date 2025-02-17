@@ -36,6 +36,7 @@ To try it out, use the demo account
 
 ## Future Work focused on Backend
 * Password reset, email verification
+* Migrate to Leetcode tracker
 * Add in product purchasing feature, Stripe/Buy me a coffee
 * Deploy to AWS
 
