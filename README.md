@@ -27,6 +27,9 @@ To try it out, use the demo account
 * How to use JWT for user authentication, how to protect React components and backend routes
 * How to use Passport and Google OAuth2.0 to set up user authentication via Google
 
+## Bugs Fixed
+* Backend redirect route not found in frontend, solution: use redirect/rewrite route rule to fallback to index.html for route handling
+
 
 
 ## Future Work focused on Backend
