@@ -17,8 +17,7 @@ To try it out, use the demo account
 * Frontend: React, CSS
 * Backend: nodejs with Express, RESTful API
 * Database: mongodb, mongoose
-* Tradeoff between JWT and cookie-session
-* Migrate ti HTTP-only cookie for JWT to safeguard against XSS
+* Testing: Postman
 
 ## Skills Gained
 * How to use React hooks: useState, useEffect, useContext, useReducer
@@ -27,9 +26,12 @@ To try it out, use the demo account
 * How to use JWT for user authentication, how to protect React components and backend routes
 * How to use Passport and Google OAuth2.0 to set up user authentication via Google
 
+## Technical Decisions
+* Tradeoff between JWT and cookie-session
+* Migrate to HTTP-only cookie for JWT to safeguard against XSS
+
 ## Bugs Fixed
 * Backend redirect route not found in frontend, solution: use redirect/rewrite route rule to fallback to index.html for route handling
-
 
 
 ## Future Work focused on Backend
