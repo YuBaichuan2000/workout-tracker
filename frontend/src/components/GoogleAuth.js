@@ -24,7 +24,7 @@ const GoogleAuth = () => {
       // Handle missing token/email
       navigate("/login");
     }
-  }, [searchParams, dispatch]);
+  }, [searchParams, dispatch, navigate]);
 
   return <div>Loading...</div>;
 };
