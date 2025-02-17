@@ -14,7 +14,8 @@ dotenv.config();
 const app = express();
 
 app.use(cors({
-    origin: process.env.NODE_ENV === 'development' ?  'http://localhost:3000' : 'https://workout-tracker-frontend-1gjy.onrender.com'
+    origin: process.env.NODE_ENV === 'development' ?  'http://localhost:3000' : 'https://workout-tracker-frontend-1gjy.onrender.com',
+    credentials: true
 }));
 
 app.use(express.json());
