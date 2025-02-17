@@ -5,11 +5,15 @@ import WorkoutDetails from '../components/WorkoutDetails';
 import WorkoutForm from "../components/WorkoutForm";
 import useAuthContext from '../hooks/useAuthContext';
 
+
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL
+
+
 const Home = () => {
 
     const {workouts, dispatch} = useWorkoutsContext();
     const { user } = useAuthContext();
-    const BACKEND_URL = process.env.REACT_APP_BACKEND_URL
+    
 
     useEffect(() => {
         const fetchWorkouts = async () => {
