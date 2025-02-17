@@ -6,17 +6,27 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import passport from 'passport';
 import cookieParser from 'cookie-parser';
-
+import rateLimit from 'express-rate-limit';
 
 dotenv.config();
 
-
 const app = express();
+
+const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000,
+    max: 100,
+    message: 'Too many requests from this IP, please try again later.',
+    standardHeaders: true,
+    legacyHeaders: false,
+});
+
+app.use(limiter);
 
 app.use(cors({
     origin: process.env.NODE_ENV === 'development' ?  'http://localhost:3000' : 'https://workout-tracker-frontend-1gjy.onrender.com',
     credentials: true
 }));
+
 
 // app.use(express.static(path.join(__dirname, 'build')));
 

@@ -30,7 +30,7 @@ router.get('/google/redirect', passport.authenticate('google', {session: false})
     res.cookie('token', token, {
         httpOnly: true, // not accessible to client-side JavaScript
         secure: process.env.NODE_ENV === 'production', // use HTTPS in production
-        sameSite: 'none',
+        sameSite: 'lax',
         maxAge: 24 * 60 * 60 * 1000 // cookie expires in 1 day
     });
     
