@@ -18,7 +18,7 @@ app.use(cors({
     credentials: true
 }));
 
-app.use(express.static(path.join(__dirname, 'build')));
+// app.use(express.static(path.join(__dirname, 'build')));
 
 app.use(express.json());
 app.use(passport.initialize());
@@ -27,9 +27,9 @@ app.use(cookieParser());
 app.use('/api/workouts', workoutRoutes);
 app.use('/api/users', userRoutes);
 
-app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
-});
+// app.get('*', (req, res) => {
+//     res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
+// });
 
 mongoose.connect(process.env.MONGO_URI)
 .then(() => {
