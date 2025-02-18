@@ -43,6 +43,7 @@ const Login = () => {
       <button onClick={handleGoogleLogin} disabled={isLoading}>
         Google
       </button>
+      <button>Forgot Password</button>
       {error && <div className="error">{error}</div>}
     </form>
   );

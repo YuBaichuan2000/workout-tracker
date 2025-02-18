@@ -1,6 +1,6 @@
 import express from 'express';
 import passport from 'passport';
-import { loginUser, signupUser, logoutUser, verifyEmail } from '../controllers/userController.js';
+import { loginUser, signupUser, logoutUser, verifyEmail, forgotPassword, resetPassword } from '../controllers/userController.js';
 import passportSetup from '../config/passport.js';
 import dotenv from 'dotenv';
 
@@ -19,6 +19,10 @@ router.post('/logout', logoutUser);
 
 // verify token
 router.post('/verify-email', verifyEmail);
+
+router.post('/forgot-password', forgotPassword);
+
+router.post('/reset-password/:token', resetPassword);
 
 // auth with Google
 router.get('/google', passport.authenticate('google', {
