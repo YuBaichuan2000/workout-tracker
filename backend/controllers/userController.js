@@ -72,18 +72,16 @@ export const verifyEmail = async (req, res) => {
 
         if (!user) {
             return res.status(400).json({error: 'Invalid or expired token'});
-        } else {
-            user.isVerified = true;
-            user.verificationToken = undefined;
-            user.verificationTokenExpiresAt = undefined;
-            await user.save();
-
-            await sendWelcomeEmail(user.email);
-
-            res.status(200).json({email: user.email});
         }
 
-        
+        user.isVerified = true;
+        user.verificationToken = undefined;
+        user.verificationTokenExpiresAt = undefined;
+        await user.save();
+
+        await sendWelcomeEmail(user.email);
+
+        res.status(200).json({email: user.email});
 
 
     } catch (e) {
