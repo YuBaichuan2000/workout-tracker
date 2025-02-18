@@ -1,9 +1,9 @@
 import express from 'express';
 import passport from 'passport';
-import { loginUser, signupUser, logoutUser } from '../controllers/userController.js';
+import { loginUser, signupUser, logoutUser, verifyEmail } from '../controllers/userController.js';
 import passportSetup from '../config/passport.js';
 import dotenv from 'dotenv';
-import jwt from 'jsonwebtoken';
+
 dotenv.config();
 
 const router = express.Router();
@@ -16,6 +16,9 @@ router.post('/signup', signupUser);
 
 // logout
 router.post('/logout', logoutUser);
+
+// verify token
+router.post('/verify-email', verifyEmail);
 
 // auth with Google
 router.get('/google', passport.authenticate('google', {

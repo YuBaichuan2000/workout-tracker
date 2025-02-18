@@ -1,6 +1,8 @@
 import User from  '../models/userModels.js';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
+import { sendVerificationEmail, sendWelcomeEmail } from '../config/emails.js';
+
 dotenv.config();
 
 const createToken = (_id) => {
@@ -51,6 +53,8 @@ export const signupUser = async (req, res) => {
             maxAge: 24 * 60 * 60 * 1000, // 1 day
             sameSite: 'lax'
         });
+        
+        await sendVerificationEmail(user.email, user.verificationToken);
     
         res.status(200).json({ email });
 
@@ -59,6 +63,35 @@ export const signupUser = async (req, res) => {
     }
 
 };
+
+export const verifyEmail = async (req, res) => {
+    const { verificationToken } = req.body;
+
+    try {
+        const user = await User.findOne({verificationToken: verificationToken, verificationTokenExpiresAt: {$gt: Date.now()}});
+
+        if (!user) {
+            return res.status(400).json({error: 'Invalid or expired token'});
+        } else {
+            user.isVerified = true;
+            user.verificationToken = undefined;
+            user.verificationTokenExpiresAt = undefined;
+            await user.save();
+
+            await sendWelcomeEmail(user.email);
+
+            res.status(200).json({email: user.email});
+        }
+
+        
+
+
+    } catch (e) {
+        res.status(500).json({error: e.message});
+    }
+
+}
+
 
 // logout user and clear cookie
 export const logoutUser = async (req, res) => {
