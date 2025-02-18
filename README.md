@@ -37,7 +37,7 @@ To try it out, use the demo account
 ## Future Work focused on Backend
 * Password reset
 * Migrate to Leetcode tracker
-* Deploy to AWS
+* Docker => AWS
 
 
 
