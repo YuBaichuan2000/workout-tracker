@@ -57,7 +57,7 @@ export const signupUser = async (req, res) => {
         
         await sendVerificationEmail(user.email, user.verificationToken);
     
-        res.status(200).json({ email });
+        res.status(200).json({ msg: 'User created and verification email sent' }); // send email verification, and wait for verification
 
     } catch (e) {
         res.status(400).json({error: e.message});
@@ -82,7 +82,7 @@ export const verifyEmail = async (req, res) => {
 
         await sendWelcomeEmail(user.email);
 
-        res.status(200).json({email: user.email});
+        res.status(200).json({ msg: 'User completed verification' });
 
 
     } catch (e) {
@@ -134,6 +134,7 @@ export const resetPassword = async (req, res) => {
 
         //update password
         const hashedPassword = await bcrypt.hash(password, 10);
+        user.password = hashedPassword; // ????
         user.resetPasswordToken = undefined;
         user.resetPasswordTokenExpiresAt = undefined;
 

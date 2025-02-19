@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import Navbar from './components/Navbar';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import Verify from './pages/Verify';
 import GoogleAuth from "./components/GoogleAuth";
 
 function App() {
@@ -20,7 +21,9 @@ function App() {
             <Route path='/' element={user ? <Home /> : <Navigate to='/login' />}></Route>
             <Route path='/login' element={!user ? <Login /> : <Navigate to='/' />}></Route>
             <Route path="/auth/google" element={<GoogleAuth />} />
+            <Route path="/verify-email" element={<Verify />} />
             <Route path='/signup' element={!user ? <Signup /> : <Navigate to='/' />}></Route>
+
           </Routes>
         </div>
       
