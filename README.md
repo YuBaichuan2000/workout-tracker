@@ -5,6 +5,9 @@ To try it out, use the demo account
 - Email: demouser1@gmail.com
 - Password: 9e%kr8Ud92$k
 
+- Email: baichuan.yu@student.adelaide.edu.au
+- Password: #Cc]?,3K5,Ybcq%+7#XNW6J
+
 ## User stories
 * As a user, I want to signup or login
 * As a user, I want to signup or login using Google account
