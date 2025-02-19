@@ -158,3 +158,10 @@ form.signup, form.login {
   color: red;
   font-size: 14px;
 }
+
+
+.reset-container {
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
+}

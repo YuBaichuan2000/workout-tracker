@@ -2,6 +2,7 @@ import User from  '../models/userModels.js';
 import jwt from 'jsonwebtoken';
 import crypto from 'crypto';
 import dotenv from 'dotenv';
+import bcrypt from 'bcrypt';
 import { sendVerificationEmail, sendWelcomeEmail, sendPasswordResetEmail, sendPasswordResetSuccessEmail } from '../config/emails.js';
 
 dotenv.config();
@@ -60,7 +61,7 @@ export const signupUser = async (req, res) => {
         res.status(200).json({ msg: 'User created and verification email sent' }); // send email verification, and wait for verification
 
     } catch (e) {
-        res.status(400).json({error: e.message});
+        res.status(500).json({error: e.message});
     }
 
 };
@@ -104,8 +105,8 @@ export const forgotPassword = async (req, res) => {
         const resetToken = crypto.randomBytes(20).toString('hex');
         const resetTokenExpiresAt = Date.now() + 60*60*1000; // expires in 1 hour
 
-        user.resetToken = resetToken;
-        user.resetTokenExpiresAt = resetTokenExpiresAt;
+        user.resetPasswordToken = resetToken;
+        user.resetPasswordExpiresAt = resetTokenExpiresAt;
 
         await user.save();
 
@@ -115,7 +116,7 @@ export const forgotPassword = async (req, res) => {
 
         await sendPasswordResetEmail(user.email, `${baseUrl}/reset-password/${resetToken}`);
 
-        res.status(200).json({email: user.email});
+        res.status(200).json({msg: 'User wait for reset link' });
 
     } catch (e) {
         res.status(500).json({error: e.message});
@@ -123,24 +124,25 @@ export const forgotPassword = async (req, res) => {
 }
 
 export const resetPassword = async (req, res) => {
-    const { resetPasswordToken } = req.params;
+    const { token } = req.params;
     const { password } = req.body;
 
     try {
-        const user = await User.findOne({resetPasswordToken: resetPasswordToken, resetPasswordTokenExpiresAt: {$gt: Date.now()}});
+        const user = await User.findOne({resetPasswordToken: token, resetPasswordExpiresAt: {$gt: Date.now()}});
         if (!user) {
             return res.status(400).json({error: 'Invalid or expired token'});
         }
 
         //update password
         const hashedPassword = await bcrypt.hash(password, 10);
-        user.password = hashedPassword; // ????
+        user.password = hashedPassword; 
         user.resetPasswordToken = undefined;
-        user.resetPasswordTokenExpiresAt = undefined;
+        user.resetPasswordExpiresAt = undefined;
+        
 
         await user.save();
 
-        sendResetSucessEmail(user.email);
+        await sendPasswordResetSuccessEmail(user.email);
 
         res.status(200).json({email: user.email});
 

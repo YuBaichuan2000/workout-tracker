@@ -19,7 +19,11 @@ const Login = () => {
     e.preventDefault();
 
     await forgotPassword(email);
-    
+
+    if (!error) {
+      alert("Password reset email sent. Please check your inbox.");
+    }
+
   };
 
   const handleGoogleLogin = async (e) => {
