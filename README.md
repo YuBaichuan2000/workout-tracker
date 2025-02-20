@@ -37,7 +37,8 @@ To try it out, use the demo account
 * Backend redirect route not found in frontend, solution: use redirect/rewrite route rule to fallback to index.html for route handling
 
 
-## Future Work focused on Backend
+## Future Work
+* Migrated rate limiting to centralized Redis
 * Docker => AWS
 * Testing
 * Documentation
