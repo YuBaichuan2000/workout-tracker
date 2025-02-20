@@ -17,7 +17,12 @@ const userSchema = new Schema ({
     // for google authentication
     googleId: {
         type: String
-    }
+    },
+    isVerified: Boolean,
+    resetPasswordToken: String,
+    resetPasswordExpiresAt: Date,
+    verificationToken: String,
+    verificationTokenExpiresAt: Date
 })
 
 // static signup method, regular function is needed when this keyword in use
@@ -48,7 +53,10 @@ userSchema.statics.signup = async function (email, password) {
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(password, salt);
 
-    const user = await this.create({ email, password: hash });
+    // verfication code
+    const verificationToken = Math.floor(100000 + Math.random() * 900000).toString();
+
+    const user = await this.create({ email, password: hash, verificationToken, isVerified: false, verificationTokenExpiresAt: Date.now()+60*60*1000}); // expires in one hour
 
     return user;
 

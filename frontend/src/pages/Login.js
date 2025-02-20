@@ -8,11 +8,22 @@ const backendUrl = process.env.REACT_APP_BACKEND_URL
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { login, error, isLoading } = useLogin();
+  const { login, error, isLoading, forgotPassword } = useLogin();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     await login(email, password);
+  };
+
+  const handleForgot = async (e) => {
+    e.preventDefault();
+
+    await forgotPassword(email);
+
+    if (!error) {
+      alert("Password reset email sent. Please check your inbox.");
+    }
+
   };
 
   const handleGoogleLogin = async (e) => {
@@ -43,6 +54,7 @@ const Login = () => {
       <button onClick={handleGoogleLogin} disabled={isLoading}>
         Google
       </button>
+      <button onClick={handleForgot}>Forgot Password</button>
       {error && <div className="error">{error}</div>}
     </form>
   );
