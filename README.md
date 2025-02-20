@@ -39,6 +39,8 @@ To try it out, use the demo account
 
 ## Future Work focused on Backend
 * Docker => AWS
+* Testing
+* Documentation
 
 
 
