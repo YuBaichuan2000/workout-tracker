@@ -20,30 +20,52 @@ const createToken = (_id) => {
 //     }
 // })
 
-export default passport.use(new GoogleStrategy({
-    // options for strategy
-    callbackURL: process.env.NODE_ENV === 'development' ?  'http://localhost:4000/api/users/google/redirect' : 'https://workout-tracker-f15p.onrender.com/api/users/google/redirect',
-    clientID: process.env.CLIENT_ID,
-    clientSecret: process.env.CLIENT_SECRET
-}, async (accessToken, refreshToken, profile, done) => {
-    // check if user already exist
-    const currUser = await User.findOne({googleId: profile.id})
-
-    if (currUser) {
-        
-        // create token
-        const token = createToken(currUser._id);
-    
-
-        done(null, {email: currUser.email, token});
-    } else {
-        const newUser = new User({email: profile.emails[0].value, googleId: profile.id});
-        await newUser.save();
-
-        const token = createToken(newUser._id);
-
-        done(null,{email: newUser.email, token});
-    }
-}));
-
-
+export default passport.use(
+    new GoogleStrategy(
+      {
+        // options for strategy
+        callbackURL:
+          process.env.NODE_ENV === "development"
+            ? "http://localhost:4000/api/users/google/redirect"
+            : "https://workout-tracker-f15p.onrender.com/api/users/google/redirect",
+        clientID: process.env.CLIENT_ID,
+        clientSecret: process.env.CLIENT_SECRET,
+      },
+      async (accessToken, refreshToken, profile, done) => {
+        try {
+          // Check if a user already exists with the Google ID
+          let user = await User.findOne({ googleId: profile.id });
+  
+          // If not, check if a user exists with the same email
+          if (!user) {
+            user = await User.findOne({ email: profile.emails[0].value });
+            if (user) {
+              // If found, update the user's googleId field (merging accounts)
+              if (!user.googleId) {
+                user.googleId = profile.id;
+                await user.save();
+              }
+            }
+          }
+  
+          // If user exists (either found by googleId or updated by email), log them in
+          if (user) {
+            const token = createToken(user._id);
+            return done(null, { email: user.email, token });
+          }
+  
+          // Otherwise, create a new user with Google credentials
+          const newUser = new User({
+            email: profile.emails[0].value,
+            googleId: profile.id,
+          });
+          await newUser.save();
+          const token = createToken(newUser._id);
+          return done(null, { email: newUser.email, token });
+        } catch (err) {
+          return done(err, null);
+        }
+      }
+    )
+  );
+  
