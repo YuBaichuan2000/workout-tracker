@@ -38,8 +38,6 @@ To try it out, use the demo account
 
 
 ## Future Work
-* Migrated rate limiting to centralized Redis
-* Docker => AWS
 * Testing
 * Documentation
 
