@@ -29,9 +29,12 @@ To try it out, use the demo account
 * How to use JWT for user authentication, how to protect React components and backend routes
 * How to use Passport and Google OAuth2.0 to set up user authentication via Google
 
-## Technical Decisions
-* Tradeoff between JWT and cookie-session
-* Migrate to HTTP-only cookie for JWT to safeguard against XSS
+## Authentication Technical Decisions
+* Tradeoff between JWT and session-based
+  - JWT is stateless, easy to scale, token is exchanged between client and server in req.headers, good with microservices architecture
+  - session-based is stateful and server stores session info, session id is exchanged between client and server, latency with centralised Redis store but can revoke session instantly, leverage existing centralized datastore
+* Migrate to HTTP-only cookie for JWT from localStorage to safeguard against XSS
+* Server-side validation endpoint VS client-side state management to verify if an user is logged in
 
 ## Bugs Fixed
 * Backend redirect route not found in frontend, solution: use redirect/rewrite route rule to fallback to index.html for route handling
