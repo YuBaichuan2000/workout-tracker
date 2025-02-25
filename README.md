@@ -35,6 +35,8 @@ To try it out, use the demo account
   - session-based is stateful and server stores session info, session id is exchanged between client and server, latency with centralised Redis store but can revoke session instantly, leverage existing centralized datastore
 * Migrate to HTTP-only cookie for JWT from localStorage to safeguard against XSS
 * Server-side validation endpoint VS client-side state management to verify if an user is logged in
+  - Server-side is more secure and expiration can be reflected immediately, but introduce more server calls and latency, tried reduce workload by Redis
+  - Client-side is fast but complex to implement, invalidation is not reflected immediately, need to call server to reflect expiration
 
 ## Bugs Fixed
 * Backend redirect route not found in frontend, solution: use redirect/rewrite route rule to fallback to index.html for route handling
