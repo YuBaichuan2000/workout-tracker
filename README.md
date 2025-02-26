@@ -37,6 +37,11 @@ To try it out, use the demo account
 * Server-side validation endpoint VS client-side state management to verify if an user is logged in
   - Server-side is more secure and expiration can be reflected immediately, but introduce more server calls and latency, tried reduce workload by Redis
   - Client-side is fast but complex to implement, invalidation is not reflected immediately, need to call server to reflect expiration
+ 
+## Database Technical Decisions
+* Tradeoff between NoSQL and Relational DB
+  - NoSQL: flexible schema with simple queries, highly scalable and fast retrival(social media app)
+  - Relational DB: structured schema with complex relationship(banking system)
 
 ## Bugs Fixed
 * Backend redirect route not found in frontend, solution: use redirect/rewrite route rule to fallback to index.html for route handling
