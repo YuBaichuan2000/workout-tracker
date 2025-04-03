@@ -113,7 +113,7 @@ const WorkoutForm = () => {
     return ( 
         <form className="create" onSubmit={handleSubmit}>
             <h3>{editWorkout ? "Edit Workout" : "Add a new workout"}</h3>
-            <label>Excersize Title:</label>
+            <label>Exercise:</label>
             <input type="text" 
                     onChange={(e) => setTitle(e.target.value)}
                     value={title}
@@ -134,7 +134,7 @@ const WorkoutForm = () => {
                     className={emptyFields.includes('reps') ? 'error' : ''}
             />
             <button>{editWorkout ? "Update Workout" : "Add Workout"}</button>
-            <button type="button" onClick={handleAISuggest}>AI Suggested</button>
+            <button type="button" onClick={handleAISuggest}>AI Suggest</button>
             {error && <div className="error">{error}</div>}
         </form>
     );

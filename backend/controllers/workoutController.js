@@ -44,8 +44,6 @@ export const suggestWorkout = async (req, res) => {
         const prompt1 = await prompt.invoke({ history: historyText });
         
         const result = await structuredLlm.invoke(prompt1);
-
-        console.log(result);
         
         // Return the structured suggestion as JSON
         res.status(200).json(result);
