@@ -7,27 +7,27 @@ import cors from 'cors';
 import passport from 'passport';
 import cookieParser from 'cookie-parser';
 import rateLimit from 'express-rate-limit';
-import RedisStore from 'rate-limit-redis';
-import redisClient from './redisClient.js';
+// import RedisStore from 'rate-limit-redis';
+// import redisClient from './redisClient.js';
 
 dotenv.config();
 
 const app = express();
 
 // Configure the rate limiter middleware
-const limiter = rateLimit({
-    windowMs: 15 * 60 * 1000, // 15-minute window
-    max: 100, // Limit each IP to 100 requests per windowMs
-    message: 'Too many requests from this IP, please try again later.',
-    standardHeaders: true, 
-    legacyHeaders: false,  
-    store: new RedisStore({
-      // Use the connected redisClient to store rate limit data
-      sendCommand: (...args) => redisClient.sendCommand(args),
-    }),
-  });
+// const limiter = rateLimit({
+//     windowMs: 15 * 60 * 1000, // 15-minute window
+//     max: 100, // Limit each IP to 100 requests per windowMs
+//     message: 'Too many requests from this IP, please try again later.',
+//     standardHeaders: true, 
+//     legacyHeaders: false,  
+//     store: new RedisStore({
+//       // Use the connected redisClient to store rate limit data
+//       sendCommand: (...args) => redisClient.sendCommand(args),
+//     }),
+//   });
 
-app.use(limiter);
+// app.use(limiter);
 
 app.use(cors({
     origin: process.env.NODE_ENV === 'development' ?  'http://localhost:3000' : 'https://workout-tracker-frontend-1gjy.onrender.com',

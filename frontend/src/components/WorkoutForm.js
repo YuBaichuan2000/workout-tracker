@@ -79,6 +79,37 @@ const WorkoutForm = () => {
         }
     }
 
+    const handleAISuggest = async () => {
+        if (!user) {
+            setError('You must be logged in');
+            return;
+        }
+        
+        try {
+            const response = await fetch(`${BACKEND_URL}/api/workouts/suggest`, {
+            method: 'GET',
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' }
+            });
+        
+            const suggestion = await response.json();
+        
+            if (response.ok) {
+            // Fill the form fields with the AI suggestion
+            setTitle(suggestion.title);
+            setLoad(suggestion.load);
+            setReps(suggestion.reps);
+            setError(null);
+            setEmptyFields([]);
+            } else {
+            setError(suggestion.error || 'Failed to get AI suggestion');
+            }
+        } catch (err) {
+            console.error(err);
+            setError('An error occurred while fetching AI suggestion');
+        }
+    };
+
     return ( 
         <form className="create" onSubmit={handleSubmit}>
             <h3>{editWorkout ? "Edit Workout" : "Add a new workout"}</h3>
@@ -103,6 +134,7 @@ const WorkoutForm = () => {
                     className={emptyFields.includes('reps') ? 'error' : ''}
             />
             <button>{editWorkout ? "Update Workout" : "Add Workout"}</button>
+            <button type="button" onClick={handleAISuggest}>AI Suggested</button>
             {error && <div className="error">{error}</div>}
         </form>
     );
