@@ -6,7 +6,7 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import passport from 'passport';
 import cookieParser from 'cookie-parser';
-import rateLimit from 'express-rate-limit';
+// import rateLimit from 'express-rate-limit';
 // import RedisStore from 'rate-limit-redis';
 // import redisClient from './redisClient.js';
 
