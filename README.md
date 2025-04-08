@@ -5,9 +5,6 @@ To try it out, use the demo account(email verification and reset password only w
 - Email: demouser1@gmail.com
 - Password: 9e%kr8Ud92$k
 
-- Email: baichuan.yu@student.adelaide.edu.au
-- Password: 9e%kr8Ud92$k
-
 ## Tech Stack
 * Frontend: React, CSS
 * Backend: nodejs with Express, RESTful API, Langchain for AI Agent
