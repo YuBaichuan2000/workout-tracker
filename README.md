@@ -1,7 +1,7 @@
 # [workout-tracker](https://workout-tracker-frontend-1gjy.onrender.com/) deployed on Render
 
 ## Demo
-To try it out, use the demo account
+To try it out, use the demo account(email verification and reset password only work for my own uni email because a domain name is not purchased)
 - Email: demouser1@gmail.com
 - Password: 9e%kr8Ud92$k
 
