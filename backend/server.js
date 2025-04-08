@@ -30,10 +30,13 @@ const app = express();
 // app.use(limiter);
 
 app.use(cors({
-    origin: process.env.NODE_ENV === 'development' ?  'http://localhost:3000' : 'https://workout-tracker-frontend-1gjy.onrender.com',
-    credentials: true
+    origin: process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://workout-tracker-frontend-1gjy.onrender.com',
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 
+app.set('trust proxy', 1); // trust first proxy for secure cookies
 
 // app.use(express.static(path.join(__dirname, 'build')));
 
