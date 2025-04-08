@@ -34,7 +34,6 @@ app.use(cors({
     credentials: true,
 }));
 
-app.set('trust proxy', 1); // trust first proxy for secure cookies
 
 // app.use(express.static(path.join(__dirname, 'build')));
 

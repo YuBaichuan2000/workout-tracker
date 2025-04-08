@@ -49,12 +49,12 @@ export const signupUser = async (req, res) => {
         const token = createToken(user._id);
 
         // Set the token as an HTTP-only cookie
-        res.cookie("token", token, {
+        res.cookie('token', token, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === "production",
-            maxAge: 24 * 60 * 60 * 1000, // 1 day
-            sameSite: 'lax'
-        });
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+            maxAge: 24*60*60*1000,
+        })
         
         await sendVerificationEmail(user.email, user.verificationToken);
     
@@ -157,7 +157,7 @@ export const logoutUser = async (req, res) => {
         res.clearCookie('token', {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
-            sameSite: 'lax'
+            sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
         });
         res.status(200).json({msg: 'Logout sucessful'});
     } catch (e) {
