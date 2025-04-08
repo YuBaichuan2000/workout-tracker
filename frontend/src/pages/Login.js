@@ -15,15 +15,21 @@ const Login = () => {
     await login(email, password);
   };
 
+
   const handleForgot = async (e) => {
     e.preventDefault();
-
+    
+    if (!email || email.trim() === "") {
+      // Show an error if the email field is empty
+      alert("Please enter your email address first");
+      return;
+    }
+    
     await forgotPassword(email);
-
+    
     if (!error) {
       alert("Password reset email sent. Please check your inbox.");
     }
-
   };
 
   const handleGoogleLogin = async (e) => {
