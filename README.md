@@ -1,4 +1,4 @@
-# [workout-tracker](https://workout-tracker-frontend-1gjy.onrender.com/) deployed on Render
+# [workout-tracker](https://workout-tracker-frontend-1gjy.onrender.com/) fully deployed
 
 ## Demo
 To try it out, use the demo account(email verification and reset password only work for my own uni email because a domain name is not purchased)
