@@ -1,7 +1,8 @@
-// GoogleAuth.jsx
-import React, { useEffect } from "react";
+// GoogleAuth.tsx
+import { useEffect } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import useAuthContext from "../hooks/useAuthContext";
+import { User } from "../types";
 
 const GoogleAuth = () => {
   const [searchParams] = useSearchParams();
@@ -9,11 +10,11 @@ const GoogleAuth = () => {
   const { dispatch } = useAuthContext();
 
   useEffect(() => {
-    // Retrieve token and email from query params
+    // Retrieve email from query params
     const email = searchParams.get("email");
 
     if (email) {
-      const user = { email };
+      const user: User = { email };
       // Save user to localStorage 
       localStorage.setItem("user", JSON.stringify(user));
       
@@ -21,7 +22,7 @@ const GoogleAuth = () => {
       
       navigate("/");
     } else {
-      // Handle missing token/email
+      // Handle missing email
       navigate("/login");
     }
   }, [searchParams, dispatch, navigate]);

@@ -1,19 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, FormEvent } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import useAuthContext from "../hooks/useAuthContext";
 
-const backendUrl = process.env.REACT_APP_BACKEND_URL;
+const backendUrl = process.env.REACT_APP_BACKEND_URL || '';
+
+type ResetParams = {
+  token?: string;
+};
 
 const Reset = () => {
-  const { token } = useParams(); // token is the reset password token
+  const params = useParams<ResetParams>();
+  const token = params.token || '';
   const navigate = useNavigate();
   const { dispatch } = useAuthContext();
-  const [newPassword, setNewPassword] = useState("");
-  const [error, setError] = useState("");
-  const [message, setMessage] = useState("");
+  const [newPassword, setNewPassword] = useState<string>("");
+  const [error, setError] = useState<string>("");
+  const [message, setMessage] = useState<string>("");
 
   // Handle form submission to reset password
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!newPassword) {
       setError("Please enter a new password.");
@@ -44,6 +49,7 @@ const Reset = () => {
     }
   };
 
+  // Rest of the component remains the same
   return (
     <div className="reset-container">
       <h3>Reset Password</h3>

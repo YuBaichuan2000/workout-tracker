@@ -1,15 +1,15 @@
-import { useState } from "react";
+import React, { useState, FormEvent, ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
 
-const backendUrl = process.env.REACT_APP_BACKEND_URL;
+const backendUrl = process.env.REACT_APP_BACKEND_URL || '';
 
 const Verify = () => {
-    const [code, setCode] = useState("");
-    const [error, setError] = useState("");
-    const [message, setMessage] = useState("");
+    const [code, setCode] = useState<string>("");
+    const [error, setError] = useState<string>("");
+    const [message, setMessage] = useState<string>("");
     const navigate = useNavigate();
 
-    const handleChange = (e) => {
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const input = e.target.value;
 
         // Allow only numeric input and limit to 6 digits
@@ -21,7 +21,7 @@ const Verify = () => {
         }
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         if (code.length !== 6) {
@@ -36,7 +36,7 @@ const Verify = () => {
             const response = await fetch(`${backendUrl}/api/users/verify-email`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ verificationToken: code }) // Ensure naming matches your backend!
+                body: JSON.stringify({ verificationToken: code })
             });
 
             const data = await response.json();
@@ -64,7 +64,7 @@ const Verify = () => {
                     placeholder="6-digit code"
                     value={code}
                     onChange={handleChange}
-                    maxLength="6"
+                    maxLength={6}
                     className="verify-input"
                 />
                 {error && <p className="error-message">{error}</p>}

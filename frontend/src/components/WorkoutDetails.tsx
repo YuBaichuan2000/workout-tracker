@@ -1,30 +1,38 @@
 import useWorkoutsContext from '../hooks/useWorkoutsContext';
 import useAuthContext from '../hooks/useAuthContext';
+import { Workout } from '../types';
 
-// date fns
-import formatDistanceToNow from 'date-fns/formatDistanceToNow'
+// date fns - fixed import
+import { formatDistanceToNow } from 'date-fns';
 
-const WorkoutDetails = ( {workout} ) => {
+interface WorkoutDetailsProps {
+    workout: Workout;
+}
 
+const WorkoutDetails = ({ workout }: WorkoutDetailsProps) => {
     const { dispatch } = useWorkoutsContext();
     const { user } = useAuthContext();
-    const BACKEND_URL = process.env.REACT_APP_BACKEND_URL
+    const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || '';
 
     const handleDelete = async () => {
         if (!user) {
             return;
         }
-        // 
-        const response = await fetch(`${BACKEND_URL}/api/workouts/`+workout._id, {
-            method: 'DELETE',
-            credentials: 'include',
-            headers: { 'Content-Type': 'application/json'}}
-        );
-
-        const json = await response.json();
         
-        if (response.ok) {
-            dispatch({type: 'DELETE_WORKOUT', payload: json});
+        try {
+            const response = await fetch(`${BACKEND_URL}/api/workouts/${workout._id}`, {
+                method: 'DELETE',
+                credentials: 'include',
+                headers: { 'Content-Type': 'application/json' }
+            });
+
+            const json = await response.json();
+            
+            if (response.ok) {
+                dispatch({ type: 'DELETE_WORKOUT', payload: json });
+            }
+        } catch (error) {
+            console.error("Error deleting workout:", error);
         }
     }
 
@@ -32,7 +40,7 @@ const WorkoutDetails = ( {workout} ) => {
         if (!user) {
             return;
         }
-        dispatch({type: 'SET_EDIT_WORKOUT', payload: workout});
+        dispatch({ type: 'SET_EDIT_WORKOUT', payload: workout });
     }
 
     return ( 
