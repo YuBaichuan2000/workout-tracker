@@ -1,51 +1,23 @@
 import express from 'express';
-import passport from 'passport';
-import { loginUser, signupUser, logoutUser, verifyEmail, forgotPassword, resetPassword } from '../controllers/userController.js';
-import passportSetup from '../config/passport.js';
-import dotenv from 'dotenv';
+import { createWorkout, getSingleWorkout, getWorkouts, updateWorkout, deleteWorkout, suggestWorkout  }  from '../controllers/workoutController.js';
+import requireAuth from '../middleware/requireAuth.js';
 
-dotenv.config();
 
 const router = express.Router();
 
-// login
-router.post('/login', loginUser);
+router.use(requireAuth);
 
-// signup
-router.post('/signup', signupUser);
+router.get('/', getWorkouts);
 
-// logout
-router.post('/logout', logoutUser);
+router.get('/suggest', suggestWorkout); 
 
-// verify token
-router.post('/verify-email', verifyEmail);
+router.get('/:id', getSingleWorkout);
 
-router.post('/forgot-password', forgotPassword);
+router.post('/', createWorkout);
 
-router.post('/reset-password/:token', resetPassword);
+router.delete('/:id', deleteWorkout);
 
-// auth with Google
-router.get('/google', passport.authenticate('google', {
-    scope: ['profile', 'email'],
-    session: false
-}));
+router.patch('/:id', updateWorkout);
 
-// callback route for google
-router.get('/google/redirect', passport.authenticate('google', { session: false }), (req, res) => {
-    const { email, token } = req.user as { email: string; token: string };
-
-    res.cookie('token', token, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-        sameSite: 'lax',
-        maxAge: 24 * 60 * 60 * 1000
-    });
-    
-    const redirectUrl = process.env.NODE_ENV === 'development' 
-        ? `http://localhost:3000/auth/google?email=${email}` 
-        : `https://workout-tracker-frontend-1gjy.onrender.com/auth/google?email=${email}`;
-    
-    res.redirect(redirectUrl);
-});
 
 export default router;
