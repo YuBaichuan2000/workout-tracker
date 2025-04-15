@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Express, Request, Response } from 'express';
 import passport from 'passport';
 import { loginUser, signupUser, logoutUser, verifyEmail, forgotPassword, resetPassword } from '../controllers/userController.js';
 import passportSetup from '../config/passport.js';
@@ -31,7 +31,7 @@ router.get('/google', passport.authenticate('google', {
 }));
 
 // callback route for google
-router.get('/google/redirect', passport.authenticate('google', { session: false }), (req, res) => {
+router.get('/google/redirect', passport.authenticate('google', { session: false }), (req: Request , res: Response) => {
     const { email, token } = req.user as { email: string; token: string };
 
     res.cookie('token', token, {
