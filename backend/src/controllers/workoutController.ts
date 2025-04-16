@@ -14,14 +14,8 @@ const workout = z.object({
     reps: z.number().describe("The number of repetitions"),
 });
 
-interface CustomRequest extends Request {
-    user?: {
-        _id: mongoose.Types.ObjectId;
-    };
-}
-
 // New controller function for AI-suggested workout
-export const suggestWorkout = async (req: CustomRequest, res: Response): Promise<void> => {
+export const suggestWorkout = async (req: Request, res: Response): Promise<void> => {
     try {
         if (!req.user) {
             res.status(401).json({ error: 'User not authenticated' });
@@ -58,7 +52,7 @@ export const suggestWorkout = async (req: CustomRequest, res: Response): Promise
     }
 };
 
-export const getWorkouts = async (req: CustomRequest, res: Response): Promise<void> => {
+export const getWorkouts = async (req: Request, res: Response): Promise<void> => {
     try {
         if (!req.user) {
             res.status(401).json({ error: 'User not authenticated' });
@@ -73,7 +67,7 @@ export const getWorkouts = async (req: CustomRequest, res: Response): Promise<vo
     }
 };
 
-export const getSingleWorkout = async (req: CustomRequest, res: Response): Promise<void>  => {
+export const getSingleWorkout = async (req: Request, res: Response): Promise<void>  => {
     try {
         const { id } = req.params;
 
@@ -95,7 +89,7 @@ export const getSingleWorkout = async (req: CustomRequest, res: Response): Promi
     }
 };
 
-export const createWorkout = async (req: CustomRequest, res: Response): Promise<void>  => {
+export const createWorkout = async (req: Request, res: Response): Promise<void>  => {
     try {
         if (!req.user) {
             res.status(401).json({ error: 'User not authenticated' });
@@ -122,7 +116,7 @@ export const createWorkout = async (req: CustomRequest, res: Response): Promise<
     }
 };
 
-export const deleteWorkout = async (req: CustomRequest, res: Response): Promise<void> => {
+export const deleteWorkout = async (req: Request, res: Response): Promise<void> => {
     try {
         const { id } = req.params;
 
@@ -144,7 +138,7 @@ export const deleteWorkout = async (req: CustomRequest, res: Response): Promise<
     }
 };
 
-export const updateWorkout = async (req: CustomRequest, res: Response): Promise<void> => {
+export const updateWorkout = async (req: Request, res: Response): Promise<void> => {
     try {
         const { id } = req.params;
         const { title, reps, load } = req.body;

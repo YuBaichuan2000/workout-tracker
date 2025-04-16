@@ -1,12 +1,17 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import User from '../models/userModels.js';
+import mongoose from 'mongoose';
 
 // Extend Express Request to include user property
 declare global {
     namespace Express {
         interface Request {
-            user?: any;
+            user?: { 
+                _id?: mongoose.Types.ObjectId;
+                email?: string;
+                token?: string;
+            };
         }
     }
 }
