@@ -11,6 +11,25 @@ To try it out, use the demo account(email verification and reset password only w
 * Database: mongodb, mongoose
 * Testing: Postman
 
+## API Endpoints
+### Workout Routes
+- GET /api/workouts => return an array of workout objects for the authenticated user
+- GET /api/workouts/:id => return a single workout object
+- POST /api/workouts => create and return a new workout for the authenticated user
+- PATCH /api/workouts/:id => update and return an existing workout for the authenticated user
+- DELETE /api/workouts/:id => delete and return an existing workout for the authenticated user
+- GET /api/workouts/suggest => return an AI suggested workout object
+
+### User Routes
+- POST /api/users/signup => register a new user and send a verification email
+- POST /api/users/verify-email => verify user's email using the token sent
+- POST /api/users/login => return user email and set authentication cookie in header
+- POST /api/users/logout => log out a user and clear authentication cookie in header
+- POST /api/users/forgot-password => send a password reset link to user's email
+- POST /api/users/reset-password/:token => reset password using the reset token sent
+- GET /api/users/google => Google OAuth authentication
+- GET /api/users/google/redirect => Google OAuth callback
+
 ## Skills Gained
 * How to use React hooks: useState, useEffect, useContext, useReducer
 * How to use RESTful API to communicate with frontend and backend
@@ -31,7 +50,7 @@ To try it out, use the demo account(email verification and reset password only w
 * Backend redirect route not found in frontend, solution: use redirect/rewrite route rule to fallback to index.html for route handling
 
 ## Future Work
-* Better UI Design
+* Testing
 * Documentation
 
 
