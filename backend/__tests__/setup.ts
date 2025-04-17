@@ -10,17 +10,24 @@ dotenv.config();
 
 let mongoServer: MongoMemoryServer;
 
-// Connect to the in-memory database before all tests
+// Connect to the in-memory database
 export const setupTestDB = async (): Promise<void> => {
-  mongoServer = await MongoMemoryServer.create();
-  const mongoUri = mongoServer.getUri();
-  await mongoose.connect(mongoUri);
+  // Only create a new connection if one doesn't already exist
+  if (mongoose.connection.readyState === 0) {
+    mongoServer = await MongoMemoryServer.create();
+    const mongoUri = mongoServer.getUri();
+    await mongoose.connect(mongoUri);
+  }
 };
 
-// Close database connection and stop mongodb-memory-server after all tests
+// Close database connection and stop mongodb-memory-server
 export const teardownTestDB = async (): Promise<void> => {
-  await mongoose.disconnect();
-  await mongoServer.stop();
+  if (mongoose.connection.readyState !== 0) {
+    await mongoose.disconnect();
+  }
+  if (mongoServer) {
+    await mongoServer.stop();
+  }
 };
 
 // Clear all collections between tests
@@ -31,7 +38,6 @@ export const clearDatabase = async (): Promise<void> => {
   }
 };
 
-// Integration test helpers - additional functionality
 // Helper to create a test user and get auth token
 export const createTestUser = async (): Promise<{
   userId: mongoose.Types.ObjectId;
@@ -52,6 +58,7 @@ export const createTestUser = async (): Promise<{
 };
 
 // Helper to make authenticated requests
+// Helper to make authenticated requests with proper cookie format
 export const authRequest = (app: Express, token: string) => {
   return {
     get: (url: string) => request(app).get(url).set('Cookie', [`token=${token}`]),
